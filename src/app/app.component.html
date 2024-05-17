@@ -1,12 +1,14 @@
-
-<div id="container">
+<div class="container">
   <h1>SpaceX Searching App</h1>
-  <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+  <div class="cardContainer">
+    <div class="card" style="width: 18rem;" *ngFor="let item of data; let index = index">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{item.firstName}}</h5>
+        <p class="card-text">{{item.lastName}}</p>
+        <a href="#" class="btn btn-primary">{{item.email}}</a>
+      </div>
     </div>
   </div>
+  <app-pagination [totalItems]="data.length" [itemsPerpage]="5" ></app-pagination>
 </div>
