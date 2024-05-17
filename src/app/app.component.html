@@ -2,7 +2,7 @@
   <h1>SpaceX Searching App</h1>
   <div class="cardContainer">
     <div class="card" style="width: 18rem;" *ngFor="let item of PaginatedData; let index = index">
-      <img src="..." class="card-img-top" alt="...">
+      <img [src]="item.images.large[0]" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">{{item.name}}</h5>
         <p class="card-text">{{item.name}}</p>
@@ -11,9 +11,9 @@
     </div>
   </div>
   <app-pagination 
-  [totalItems]="data.length" 
   [itemsPerpage]="itemsPerPage" 
   [currentPage]="currentPage" 
+  [totalItems]="data.length" 
   (onClick)="changePage($event)"
   ></app-pagination>
 </div>

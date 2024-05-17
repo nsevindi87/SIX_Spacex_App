@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   itemsPerPage = 5;
   currentPage = 1;
   data: any[] = [];
+  datalength=0;
 
   /* data = [
     {firstName: 'Nizami', lastName: 'Sevindi', email: 'nsevindi@exm.com'},
@@ -30,11 +31,18 @@ export class AppComponent implements OnInit {
   }
   
 
-public getLandpads(){
-    this.http.get("https://api.spacexdata.com/v4/launchpads").subscribe((response:any)=>{
-    this.data = response
-    })
+public async getLandpads(){
+  try {
+    const response: any = await this.http.get("https://api.spacexdata.com/v4/launchpads").toPromise();
+    this.data = response;
+    console.log(response);
+    this.datalength = this.data.length;
+    console.log(this.datalength)
+  } catch (error) {
+    console.error('Error fetching landpads:', error);
   }
+}
+
 
 
 
