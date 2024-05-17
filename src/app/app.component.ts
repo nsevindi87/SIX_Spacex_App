@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
 
 public getLandpads(){
     this.http.get("https://api.spacexdata.com/v4/launchpads").subscribe((response:any)=>{
-      this.data = response
+    this.data = response
     })
   }
 
