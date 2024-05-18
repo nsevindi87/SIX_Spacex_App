@@ -2,6 +2,7 @@
     width: 100%;
     margin: auto;
     padding-top: 20px;
+    flex-grow: 1;
 }
 
 .cardContainer{
@@ -10,3 +11,8 @@
     gap: 1rem;
     flex-wrap: wrap;
 }
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }

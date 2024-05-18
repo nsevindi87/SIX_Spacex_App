@@ -1,67 +1,71 @@
-<div class="container">
-  <h1 style="text-align: center">SpaceX Searching App</h1>
+<div class="wrapper">
+  <div class="container">
+    <h1 style="text-align: center">SpaceX Searching App</h1>
 
-  <div class="d-flex align-items-center my-4">
-    <!-- Card per page -->
-    <select
-      class="form-select w-50 me-4"
-      aria-label="Default select example"
-      (change)="onChangeItemsPerPage($event)"
-    >
-      <option value="7">Show me 7 Landpads</option>
-      <option value="6">Show me 6 Landpads</option>
-      <option selected value="5">Show me 5 Landpads</option>
-      <option value="4">Show me 4 Landpads</option>
-      <option value="3">Show me 3 Landpads</option>
-      <option value="2">Show me 2 Landpads</option>
-      <option value="1">Show me 1 Landpad</option>
-    </select>
-
-    <!-- Card filter -->
-    <div class="input-group w-50">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search..."
-        aria-label="Search"
-        aria-describedby="basic-addon2"
-        (input)="updateSearchTerm($event)"
-      />
-      <button
-        class="btn btn-outline-secondary"
-        type="button"
-        id="button-addon2"
+    <div class="d-flex align-items-center my-4">
+      <!-- Card per page -->
+      <select
+        class="form-select w-50 me-4"
+        aria-label="Default select example"
+        (change)="onChangeItemsPerPage($event)"
       >
-        Search
-      </button>
-    </div>
-  </div>
+        <option value="7">Show me 7 Landpads</option>
+        <option value="6">Show me 6 Landpads</option>
+        <option selected value="5">Show me 5 Landpads</option>
+        <option value="4">Show me 4 Landpads</option>
+        <option value="3">Show me 3 Landpads</option>
+        <option value="2">Show me 2 Landpads</option>
+        <option value="1">Show me 1 Landpad</option>
+      </select>
 
-  <!-- Cards -->
-  <div class="cardContainer d-flex justify-content-center align-items-center">
-    <div
-      class="card"
-      style="width: 15rem; height: 26rem"
-      *ngFor="let item of PaginatedData; let index = index"
-    >
-      <img [src]="item.images.large[0]" class="card-img-top h-75" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">Name: {{ item.name }}</h5>
-        <h5 class="card-title">Region: {{ item.region }}</h5>
-
-        <ul>
-          <li *ngFor="let launchId of item.launches.slice(0, 2)">
-            {{ launchId }}
-          </li>
-        </ul>
-        <a [href]="item.wikipedia" class="btn btn-primary w-100" target="_blank"
-          >Wikipedia</a
+      <!-- Card filter -->
+      <div class="input-group w-50">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search..."
+          aria-label="Search"
+          aria-describedby="basic-addon2"
+          (input)="updateSearchTerm($event)"
+        />
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          id="button-addon2"
         >
+          Search
+        </button>
       </div>
     </div>
-  </div>
 
-  <!-- Pagination -->
+    <!-- Cards -->
+    <div class="cardContainer d-flex justify-content-center align-items-center">
+      <div
+        class="card"
+        style="width: 15rem; height: 26rem"
+        *ngFor="let item of PaginatedData; let index = index"
+      >
+        <img [src]="item.images.large[0]" class="card-img-top h-75" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">Name: {{ item.name }}</h5>
+          <h5 class="card-title">Region: {{ item.region }}</h5>
+
+          <ul>
+            <li *ngFor="let launchId of item.launches.slice(0, 2)">
+              {{ launchId }}
+            </li>
+          </ul>
+          <a
+            [href]="item.wikipedia"
+            class="btn btn-primary w-100"
+            target="_blank"
+            >Wikipedia</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Pagination -->
+  </div>
   <app-pagination
     [itemsPerpage]="itemsPerPage"
     [currentPage]="currentPage"
@@ -70,4 +74,6 @@
     [receivedData]="data"
     (onClick)="changePage($event)"
   ></app-pagination>
+
+  <app-footer></app-footer>
 </div>
