@@ -12,6 +12,7 @@ export class AppComponent  implements OnInit  {
   data: any[] = [];
   datalength!:number;
   searchTerm: string = ''
+  filteredData: any[] = [];
 
  constructor(private http: HttpClient) { }
  
@@ -23,18 +24,23 @@ export class AppComponent  implements OnInit  {
     this.http.get<any>("https://api.spacexdata.com/v4/landpads").subscribe(data =>{
       this.data = data;
       this.datalength = this.data.length;
-      console.log('data', this.data);
-      
+      this.applyFilter();
+
     } );
   }  
+
+  applyFilter(){
+    this.filteredData = this.data.filter((item: any) => {
+      return item.name.toLowerCase().includes(this.searchTerm.toLowerCase()) || 
+             item.region.toLowerCase().includes(this.searchTerm.toLowerCase());
+    });
+    this.currentPage = 1;
+  }
+
   get PaginatedData() {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
-    return this.data.filter((item: any) => {
-      // Arama terimine göre filtreleme
-      return item.name.toLowerCase().includes(this.searchTerm.toLowerCase()) || 
-             item.region.toLowerCase().includes(this.searchTerm.toLowerCase());
-    }).slice(start, end);
+    return this.filteredData.slice(start,end)
   }
 
   changePage(page:number){
@@ -43,11 +49,12 @@ export class AppComponent  implements OnInit  {
 
   onChangeItemsPerPage(event: any) {
     this.itemsPerPage = parseInt(event.target.value);
-    this.getData()
+    this.applyFilter();
   }
 
   updateSearchTerm(event: any) {
     this.searchTerm = event.target.value;
+    this.applyFilter();
   }
  
 }

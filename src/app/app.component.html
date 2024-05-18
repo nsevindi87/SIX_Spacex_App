@@ -38,8 +38,8 @@
   <app-pagination
     [itemsPerpage]="itemsPerPage"
     [currentPage]="currentPage"
-    [totalItems]="datalength"
-    *ngIf="data.length > 0"
+    [totalItems]="filteredData.length"
+    *ngIf="filteredData.length > 0"
     [receivedData]="data"
     (onClick)="changePage($event)"
   ></app-pagination>

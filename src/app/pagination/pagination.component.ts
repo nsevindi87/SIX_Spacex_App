@@ -21,7 +21,6 @@ export class PaginationComponent implements OnInit {
   ngOnInit():void{
     console.log("Paginate Comp");
     console.log(this.itemsPerpage);
-    
     this.createPaginate()
   }
 
@@ -40,6 +39,5 @@ export class PaginationComponent implements OnInit {
     if(page>this.totalPages) return;
     this.onClick.emit(page)
   }
-
 
 }
