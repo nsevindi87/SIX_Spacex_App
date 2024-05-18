@@ -6,54 +6,48 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent  implements OnInit  {
   itemsPerPage = 5;
   currentPage = 1;
   data: any[] = [];
-  datalength=0;
-
-  /* data = [
-    {firstName: 'Nizami', lastName: 'Sevindi', email: 'nsevindi@exm.com'},
-    {firstName: 'Peter', lastName: 'Example', email: 'abc@exm.com'},
-    {firstName: 'Jacson', lastName: 'Serse', email: 'def@exm.com'},
-    {firstName: 'Mark', lastName: 'Derte', email: 'ghr@exm.com'},
-    {firstName: 'Selin', lastName: 'Karet', email: 'tge@exm.com'},
-    {firstName: 'Merva', lastName: 'Merrt', email: 'sdc@exm.com'},
-    {firstName: 'Handi', lastName: 'Hanre', email: 'asd@exm.com'},
-    {firstName: 'Kundu', lastName: 'Ders', email: 'jggj@exm.com'},
-  ] */
-
+  datalength!:number;
+  searchTerm: string = ''
 
  constructor(private http: HttpClient) { }
  
  ngOnInit() {
-   this.getLandpads();
+  this.getData()
   }
-  
 
-public async getLandpads(){
-  try {
-    const response: any = await this.http.get("https://api.spacexdata.com/v4/launchpads").toPromise();
-    this.data = response;
-    console.log(response);
-    this.datalength = this.data.length;
-    console.log(this.datalength)
-  } catch (error) {
-    console.error('Error fetching landpads:', error);
-  }
-}
-
-
-
-
+  getData(){
+    this.http.get<any>("https://api.spacexdata.com/v4/landpads").subscribe(data =>{
+      this.data = data;
+      this.datalength = this.data.length;
+      console.log('data', this.data);
+      
+    } );
+  }  
   get PaginatedData() {
-    const start = (this.currentPage -1) * this.itemsPerPage;
+    const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
-
-    return this.data.slice(start, end)
+    return this.data.filter((item: any) => {
+      // Arama terimine göre filtreleme
+      return item.name.toLowerCase().includes(this.searchTerm.toLowerCase()) || 
+             item.region.toLowerCase().includes(this.searchTerm.toLowerCase());
+    }).slice(start, end);
   }
 
   changePage(page:number){
     this.currentPage = page;
   }
+
+  onChangeItemsPerPage(event: any) {
+    this.itemsPerPage = parseInt(event.target.value);
+    this.getData()
+  }
+
+  updateSearchTerm(event: any) {
+    this.searchTerm = event.target.value;
+  }
+ 
 }

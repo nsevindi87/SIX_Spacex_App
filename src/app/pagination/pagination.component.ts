@@ -7,21 +7,28 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PaginationComponent implements OnInit {
   @Input() totalItems:any;
+  @Input() receivedData:any;
   @Input() currentPage:any;
   @Input() itemsPerpage:any;
   @Output() onClick: EventEmitter<number> = new EventEmitter();
+  @Output() onChange: EventEmitter<number> = new EventEmitter();
+
   totalPages = 0;
   pages:number[]=[]
 
-  constructor(){
-
-  }
+  constructor(){}
 
   ngOnInit():void{
+    console.log("Paginate Comp");
+    console.log(this.itemsPerpage);
+    
     this.createPaginate()
-
   }
 
+  ngOnChanges(): void {
+    this.createPaginate();
+  }
+  
   createPaginate = ()=>{
     if(this.totalItems){
       this.totalPages = Math.ceil(this.totalItems/this.itemsPerpage)
