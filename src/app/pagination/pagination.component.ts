@@ -6,35 +6,36 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent implements OnInit {
+
+  //Data Binding
   @Input() totalItems:any;
   @Input() receivedData:any;
   @Input() currentPage:any;
   @Input() itemsPerpage:any;
   @Output() onClick: EventEmitter<number> = new EventEmitter();
   @Output() onChange: EventEmitter<number> = new EventEmitter();
-
   totalPages = 0;
   pages:number[]=[]
 
-  constructor(){}
-
+  //starts with this Hook
   ngOnInit():void{
-    console.log("Paginate Comp");
-    console.log(this.itemsPerpage);
     this.createPaginate()
   }
 
+  //Render it when it changes
   ngOnChanges(): void {
     this.createPaginate();
   }
   
+  //Calculate num of page and create array 
   createPaginate = ()=>{
     if(this.totalItems){
       this.totalPages = Math.ceil(this.totalItems/this.itemsPerpage)
       this.pages = Array.from({length: this.totalPages}, (_,i)=>i + 1)
-  }
+    }
   }
 
+  //Get de value of pagination and send it
   pageClicked(page:number){
     if(page>this.totalPages) return;
     this.onClick.emit(page)

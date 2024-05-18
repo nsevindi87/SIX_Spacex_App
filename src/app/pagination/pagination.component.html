@@ -8,11 +8,12 @@
     >
       <a class="page-link" (click)="pageClicked(currentPage - 1)">Previous</a>
     </li>
+
     <!-- Pagination Numbers -->
     <li
-      (click)="pageClicked(page)"
       *ngFor="let page of pages"
       class="page-item"
+      (click)="pageClicked(page)"
       [class.active]="page === currentPage"
     >
       <a class="page-link" href="javascript:void(0)">{{ page }}</a>

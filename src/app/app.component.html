@@ -1,5 +1,6 @@
 <div class="container">
   <h1 style="text-align: center">SpaceX Searching App</h1>
+
   <div class="d-flex align-items-center my-4">
     <!-- Card per page -->
     <select
@@ -15,8 +16,8 @@
       <option value="2">Show me 2 Landpads</option>
       <option value="1">Show me 1 Landpad</option>
     </select>
-    <!-- Card filter -->
 
+    <!-- Card filter -->
     <div class="input-group w-50">
       <input
         type="text"
@@ -59,7 +60,8 @@
       </div>
     </div>
   </div>
-  <!-- Card pagination -->
+
+  <!-- Pagination -->
   <app-pagination
     [itemsPerpage]="itemsPerPage"
     [currentPage]="currentPage"
