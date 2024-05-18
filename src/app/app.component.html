@@ -43,10 +43,10 @@
       style="width: 15rem; height: 26rem"
       *ngFor="let item of PaginatedData; let index = index"
     >
-      <img [src]="item.images.large[0]" class="card-img-top h-50" alt="..." />
+      <img [src]="item.images.large[0]" class="card-img-top h-75" alt="..." />
       <div class="card-body">
-        <h5 class="card-title">{{ item.name }}</h5>
-        <h5 class="card-title">{{ item.region }}</h5>
+        <h5 class="card-title">Name: {{ item.name }}</h5>
+        <h5 class="card-title">Region: {{ item.region }}</h5>
 
         <ul>
           <li *ngFor="let launchId of item.launches.slice(0, 2)">
