@@ -42,10 +42,10 @@
     <div class="cardContainer d-flex justify-content-center align-items-center">
       <div
         class="card"
-        style="width: 15rem; height: 26rem"
+        style="width: 15rem;"
         *ngFor="let item of PaginatedData; let index = index"
       >
-        <img [src]="item.images.large[0]" class="card-img-top h-75" alt="..." />
+        <img [src]="item.images.large[0]" class="card-img-top img-fixed" alt="..." />
         <div class="card-body">
           <h5 class="card-title">Name: {{ item.name }}</h5>
           <h5 class="card-title">Region: {{ item.region }}</h5>
@@ -55,6 +55,7 @@
               {{ launchId }}
             </li>
           </ul>
+          <p *ngIf="item.launches.length > 0">There are <span>{{ item.launches.length  }} </span>launches!</p>
           <a
             [href]="item.wikipedia"
             class="btn btn-primary w-100"

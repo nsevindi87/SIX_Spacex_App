@@ -1,3 +1,9 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .container{
     width: 100%;
     margin: auto;
@@ -11,8 +17,24 @@
     gap: 1rem;
     flex-wrap: wrap;
 }
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+
+.card{
+    transition: all 0.2s ease-in;
+}
+
+.card:hover{
+    scale: 1.1;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.img-fixed {
+height: 200px;
+object-fit: cover;
+width: 100%;
+}
+
+span{
+font-style: italic;
+color: red;
+}
