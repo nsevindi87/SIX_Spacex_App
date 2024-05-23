@@ -2,6 +2,7 @@
   <div class="container">
     <h1 style="text-align: center">SpaceX Searching App</h1>
 
+    <!-- Cards per Page and Filter -->
     <div class="d-flex align-items-center my-4">
       <!-- Card per page -->
       <select
@@ -42,10 +43,14 @@
     <div class="cardContainer d-flex justify-content-center align-items-center">
       <div
         class="card"
-        style="width: 15rem;"
+        style="width: 15rem"
         *ngFor="let item of PaginatedData; let index = index"
       >
-        <img [src]="item.images.large[0]" class="card-img-top img-fixed" alt="..." />
+        <img
+          [src]="item.images.large[0]"
+          class="card-img-top img-fixed"
+          alt="..."
+        />
         <div class="card-body">
           <h5 class="card-title">Name: {{ item.name }}</h5>
           <h5 class="card-title">Region: {{ item.region }}</h5>
@@ -55,7 +60,9 @@
               {{ launchId }}
             </li>
           </ul>
-          <p *ngIf="item.launches.length > 0">There are <span>{{ item.launches.length  }} </span>launches!</p>
+          <p *ngIf="item.launches.length > 0">
+            There are <span>{{ item.launches.length }} </span>launches!
+          </p>
           <a
             [href]="item.wikipedia"
             class="btn btn-primary w-100"
@@ -65,8 +72,9 @@
         </div>
       </div>
     </div>
-    <!-- Pagination -->
   </div>
+
+  <!-- Pagination -->
   <app-pagination
     [itemsPerpage]="itemsPerPage"
     [currentPage]="currentPage"
@@ -76,5 +84,6 @@
     (onClick)="changePage($event)"
   ></app-pagination>
 
+  <!-- Footer -->
   <app-footer></app-footer>
 </div>
